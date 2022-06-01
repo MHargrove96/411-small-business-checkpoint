@@ -1,0 +1,38 @@
+[
+    {
+      "id": "1",
+      "name": "Industry",
+      "address": "110 E Martin Luther King Dr #126",
+      "city": "San Marcos",
+      "state": "TX",
+      "hours": "11a-12p",
+      "description": "Fun  Pub!"
+    },
+    {
+      "id": "2",
+      "name": "AquaBrew",
+      "address": "110 E Martin Luther King Dr Suite 130",
+      "city": "San Marcos",
+      "state": "TX",
+      "hours": "11a-12p",
+      "description": "Beers and beers!"
+    },
+    {
+      "id": "3",
+      "name": "Pluckers",
+      "address": "105 Purple Heart Trail, I-35",
+      "city": "San Marcos",
+      "state": "TX",
+      "hours": "11a-12p",
+      "description": "Wings and things!"
+    },
+    {
+      "id": "4",
+      "name": "Root Cellar",
+      "address": "215 N LBJ Dr",
+      "city": "San Marcos",
+      "state": "TX",
+      "hours": "11a-12p",
+      "description": "Brunch and stuff!"
+    }
+]
