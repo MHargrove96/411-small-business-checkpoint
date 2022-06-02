@@ -6,27 +6,31 @@ import { Box, TextField, Button } from "@mui/material";
 import classes from "./LoginForm.module.css";
 
 export default function LoginForm() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  // const [username, setUsername] = useState("");
+  // const [password, setPassword] = useState("");
   let navigate = useNavigate();
 
   function validateForm() {
     return username.length > 0 && password.length > 0;
   }
-  useEffect(() => {
-    console.log(username);
-    console.log(password);
-  }, [username, password]);
-  const handleUsername = (e) => {
-    setUsername(e.target.value);
-  };
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-  };
+  // useEffect(() => {
+  //   console.log(username);
+  //   console.log(password);
+  // }, [username, password]);
+  // const handleUsername = (e) => {
+  //   setUsername(e.target.value);
+  // };
+  // const handlePassword = (e) => {
+  //   setPassword(e.target.value);
+  // };
   const login = (e) => {
-    e.preventDefault();
-    document.cookie = "loggedIn=true;max-age=60*1000";
-    navigate.push("/");
+    // e.preventDefault();
+    // document.cookie = "loggedIn=true;max-age=60*1000";
+    // // navigate.push("/");
+
+    localStorage.setItem('user', 'true')
+    navigate('/')
+
   };
 
   return (
@@ -60,7 +64,7 @@ export default function LoginForm() {
         variant="contained"
         type="submit"
         disabled={!validateForm()}
-        onSubmit={login}
+        onClick={login}
       >
         Login
       </Button>

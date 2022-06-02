@@ -8,7 +8,7 @@ function AddBusiness() {
   const [businessAddress, setBusinessAddress] = useState("");
   const [businessHours, setBusinessHours] = useState("");
   const [businessDescription, setBusinessDescription] = useState("");
-  // const [newBusiness, setNewBusiness] = useState([]);
+  const [newBusiness, setNewBusiness] = useState([]);
 
   function validateForm() {
     return (
@@ -29,15 +29,14 @@ function AddBusiness() {
   const handleDescription = (e) => {
     setBusinessDescription(e.target.value);
   };
-  //   const createBusinessPoint = (e) => {
-  //     setNewBusiness([{
-  //       name: { businessName },
-  //       address: { businessAddress },
-  //       hours: { businessHours },
-  //       description: { businessDescription },
-  //     }]);
-  //     return newBusiness
-  //   };
+    const createBusinessPoint = (e) => {
+      setNewBusiness([{
+        name: { businessName },
+        address: { businessAddress },
+        hours: { businessHours },
+        description: { businessDescription },
+      }]);
+    };
   // useEffect(() => {
   //   console.log(businessName);
   //   console.log(businessAddress);

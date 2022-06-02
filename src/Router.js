@@ -6,28 +6,16 @@ import Home from "./components/HomeComponent/Home";
 import LoginForm from "./components/LoginFormComponent/LoginForm";
 import LocationDetails from "./components/LocationDetailsComponent/LocationDetails";
 import AddBusiness from "./components/AddBusinessComponent/AddBusiness";
+import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
 
-const checkAuth = () => true;
-
-const ProtectedRoute = () => {
-  let Navigate = useNavigate();
-
-  return (
-    <Route
-      render={(props) =>
-        checkAuth() === true ? <Outlet /> : <Navigate to="/login" />
-      }
-    />
-  );
-};
 
 function Router() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/business/:id" element={<LocationDetails />} />
-      <Route path="/login" element={<LoginForm />} />
-      <Route path="/add-business" element={<ProtectedRoute />}>
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/business/:id" element={<LocationDetails />} />
+      <Route path='/' element={<ProtectedRoutes/>}>
         <Route path="/add-business" element={<AddBusiness />} />
       </Route>
     </Routes>
