@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import businessSlice from "./business-slice";
+import userSlice from "./user-slice";
 const store = configureStore({
-  reducer: businessSlice.reducer,
+  reducer: { businesses: businessSlice.reducer, online: userSlice.reducer },
 });
 
 export default store;

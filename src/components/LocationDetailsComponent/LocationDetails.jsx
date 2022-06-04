@@ -8,22 +8,15 @@ import MapComponent from "../MapComponent/MapComponent";
 function LocationDetails() {
   let { id } = useParams();
 
-  console.log("API KEY", process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 
   const { businesses } = useSelector((state) => {
-    console.log(state.businesses, "state");
-    return state;
+    return state.businesses;
   });
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchbusinessesData());
-  }, [dispatch]);
 
   return (
     <main>
       {businesses
-        .filter((business) => business.id === id)
+        .filter((business) => business.id.toString() === id)
         .map((business) => (
           <section className="businessInfo" key={business.id}>
             <h1 id="bizName" className="displayedText">

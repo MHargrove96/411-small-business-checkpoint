@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import { Box, TextField, Button } from "@mui/material";
-// import MapComponent from "../MapComponent/MapComponent";
+import MapComponent from "../MapComponent/MapComponent";
+import { businessActions } from "../../redux/business-slice";
 
 function AddBusiness() {
   const [businessName, setBusinessName] = useState("");
   const [businessAddress, setBusinessAddress] = useState("");
   const [businessHours, setBusinessHours] = useState("");
   const [businessDescription, setBusinessDescription] = useState("");
-  const [newBusiness, setNewBusiness] = useState([]);
+  const [newBusiness, setNewBusiness] = useState({});
 
   function validateForm() {
     return (
@@ -19,30 +21,29 @@ function AddBusiness() {
   }
   const handleName = (e) => {
     setBusinessName(e.target.value);
+    setNewBusiness({ ...newBusiness, name: businessName });
   };
   const handleAddress = (e) => {
     setBusinessAddress(e.target.value);
+    setNewBusiness({ ...newBusiness, address: businessAddress });
   };
   const handleHours = (e) => {
     setBusinessHours(e.target.value);
+    setNewBusiness({ ...newBusiness, hours: businessHours });
   };
   const handleDescription = (e) => {
     setBusinessDescription(e.target.value);
+    setNewBusiness({ ...newBusiness, description: businessDescription });
   };
-    const createBusinessPoint = (e) => {
-      setNewBusiness([{
-        name: { businessName },
-        address: { businessAddress },
-        hours: { businessHours },
-        description: { businessDescription },
-      }]);
-    };
+  const dispatch = useDispatch();
+  const addBusiness = () => {
+    dispatch(businessActions.addBusiness(newBusiness));
+  };
+
   // useEffect(() => {
-  //   console.log(businessName);
-  //   console.log(businessAddress);
-  //   console.log(businessHours);
-  //   console.log(businessDescription);
-  // }, [businessName, businessAddress, businessHours, businessDescription]);
+  //   console.log(newBusiness)
+  // },
+  // [newBusiness]);
 
   return (
     <main>
@@ -79,11 +80,15 @@ function AddBusiness() {
           variant="standard"
           fullWidth
         ></TextField>
-        <Button variant="contained" type="submit" disabled={!validateForm()}>
+        <Button
+          variant="contained"
+          disabled={!validateForm()}
+          onClick={addBusiness}
+        >
           SAVE
         </Button>
       </Box>
-      {/* <MapComponent  />  */}
+      <MapComponent business={newBusiness} />
     </main>
   );
 }

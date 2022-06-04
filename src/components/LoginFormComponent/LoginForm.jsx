@@ -1,35 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { userActions } from "../../redux/user-slice";
+
 
 import { Box, TextField, Button } from "@mui/material";
 
 import classes from "./LoginForm.module.css";
 
 export default function LoginForm() {
-  // const [username, setUsername] = useState("");
-  // const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   let navigate = useNavigate();
+  let dispatch =  useDispatch();
 
   function validateForm() {
     return username.length > 0 && password.length > 0;
   }
-  // useEffect(() => {
-  //   console.log(username);
-  //   console.log(password);
-  // }, [username, password]);
-  // const handleUsername = (e) => {
-  //   setUsername(e.target.value);
-  // };
-  // const handlePassword = (e) => {
-  //   setPassword(e.target.value);
-  // };
+  const handleUsername = (e) => {
+    setUsername(e.target.value);
+  };
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  };
+  const { online } = useSelector((state) => {
+    return state
+  })
   const login = (e) => {
-    // e.preventDefault();
-    // document.cookie = "loggedIn=true;max-age=60*1000";
-    // // navigate.push("/");
-
-    localStorage.setItem('user', 'true')
-    navigate('/')
+    dispatch(userActions.login());
+    localStorage.setItem('user', 'test')
+    navigate(-1)
 
   };
 
@@ -62,7 +62,6 @@ export default function LoginForm() {
       <Button
         className={classes.loginBtn}
         variant="contained"
-        type="submit"
         disabled={!validateForm()}
         onClick={login}
       >
