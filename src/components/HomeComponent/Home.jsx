@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchbusinessesData } from "../../redux/business-actions";
+// import { fetchbusinessesData } from "../../redux/business-actions";
 import { businessActions } from "../../redux/business-slice";
-import { auth } from "../ProtectedRoutes/ProtectedRoutes";
 import { userActions } from "../../redux/user-slice";
 
 import {
@@ -19,6 +18,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import classes from "./Home.module.css";
+import { red } from "@mui/material/colors";
 
 export default function Home() {
   const { businesses } = useSelector((state) => {
@@ -31,53 +31,63 @@ export default function Home() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (businesses.length === 0) {
-      dispatch(fetchbusinessesData());
-    }
-    console.log(online, 'online state homecomponent')
-  }, [dispatch, businesses, online]);
-
   const removeBusiness = (e, id) => {
     dispatch(businessActions.removeBusiness(id));
   };
 
   return (
-    <TableContainer component={Paper} className={classes.tblContainer}>
+    <TableContainer className={classes.tblContainer}>
       <Table
         sx={{ minWidth: 650 }}
         aria-label="simple table"
         className={classes.business_TBL}
       >
         <TableHead className={classes.business_TblHead}>
-          <TableRow>
-            <TableCell className={classes.tblCell_Name}>Name</TableCell>
-            <TableCell className={classes.tblCell_Description} align="left">
+          <TableRow className={classes.tblHead_Row}>
+            <TableCell className={classes.tblHeadCell_Name}>Name</TableCell>
+            <TableCell className={classes.tblHeadCell_Description} align="left">
               Description
             </TableCell>
-            <TableCell className={classes.tblCell_Hours} align="right">
+            <TableCell className={classes.tblHeadCell_Hours} align="right">
               Hours
             </TableCell>
-            <TableCell className={classes.tblCell_Address} align="right">
+            <TableCell className={classes.tblHeadCell_Address} align="right">
               Address
             </TableCell>
-            {online && <TableCell>Delete</TableCell>}
+            {online && (
+              <TableCell className={classes.tblHeadCell_Delete} align="right">
+                Delete
+              </TableCell>
+            )}
           </TableRow>
         </TableHead>
-        <TableBody>
+        <TableBody className={classes.tblBody}>
           {businesses.map((listItem) => (
-            <TableRow key={listItem.id}>
+            <TableRow
+              key={listItem.id}
+              className={classes.tblBody_Row}
+            >
               <TableCell component="th" scope="row">
-                <Button component={Link} to={`/business/${listItem.id}`}>
+                <Button id={classes.businessName_P} className={classes.tblBody_Text} component={Link} to={`/business/${listItem.id}`}>
                   {listItem.name}
                 </Button>
               </TableCell>
               <TableCell align="left">{listItem.description}</TableCell>
               <TableCell align="right">{listItem.hours}</TableCell>
-              <TableCell align="right">{listItem.address}</TableCell>
+              <TableCell align="right" id={classes.addressText_Cell}>
+                <p className={classes.tblBody_Text}>{listItem.address}</p>
+                <p className={classes.tblBody_Text}>
+                  {listItem.city}, {listItem.state}
+                </p>
+                <p className={classes.tblBody_Text}>{listItem.zip}</p>
+              </TableCell>
               {online && (
                 <TableCell align="right">
-                  <DeleteIcon onClick={(e) => removeBusiness(e, listItem.id)} />
+                  <DeleteIcon
+                    className={classes.tblBody_Text}
+                    id={classes.deleteIcon}
+                    onClick={(e) => removeBusiness(e, listItem.id)}
+                  />
                 </TableCell>
               )}
             </TableRow>

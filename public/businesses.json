@@ -6,7 +6,8 @@
       "city": "San Marcos",
       "state": "TX",
       "hours": "11a-12p",
-      "description": "Fun  Pub!"
+      "description": "Fun  Pub!",
+      "zip": "78666"
     },
     {
       "id": "2",
@@ -15,7 +16,8 @@
       "city": "San Marcos",
       "state": "TX",
       "hours": "11a-12p",
-      "description": "Beers and beers!"
+      "description": "Beers and beers!",
+      "zip": "78666"
     },
     {
       "id": "3",
@@ -24,7 +26,8 @@
       "city": "San Marcos",
       "state": "TX",
       "hours": "11a-12p",
-      "description": "Wings and things!"
+      "description": "Wings and things!",
+      "zip": "78666"
     },
     {
       "id": "4",
@@ -33,6 +36,7 @@
       "city": "San Marcos",
       "state": "TX",
       "hours": "11a-12p",
-      "description": "Brunch and stuff!"
+      "description": "Brunch and stuff!",
+      "zip": "78666"
     }
 ]

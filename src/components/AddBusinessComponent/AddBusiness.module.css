@@ -1,0 +1,18 @@
+.main{
+    display: flex;
+    flex-direction: row !important;
+    justify-content: center;
+    padding-top: 50px;
+    gap: 20px;
+}
+.textFeildBox{
+    max-width: 50% !important;
+    width: 100% !important;
+    display: flex;
+    flex-direction: column !important;
+    
+}
+.submitBtn{
+  width: 50%;
+  padding-top: 25px;
+}

@@ -13,7 +13,7 @@ const businessSlice = createSlice({
     addBusiness(state, action) {
       let id = state.businesses.length + 1;
       action.payload.id = id;
-      // console.log("payload", action.payload);
+      console.log("payload", action.payload);
       state.businesses = [...state.businesses, action.payload];
     },
     removeBusiness(state, action) {

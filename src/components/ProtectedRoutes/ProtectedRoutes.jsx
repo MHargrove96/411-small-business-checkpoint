@@ -1,27 +1,16 @@
 import React from "react";
 import { Outlet, Navigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { userActions } from "../../redux/user-slice";
 
-export const useAuth = () => {
-  const user = localStorage.getItem("user");
-  if (user) {
-    return true;
-  } else {
-    return false;
-  }
-};
-export const auth = () => {
-  const user = localStorage.getItem("user");
-  if (user) {
-    return true;
-  } else {
-    return false;
-  }
-};
 
 const ProtectedRoutes = () => {
-  const auth = useAuth();
+  const { online } = useSelector((state) => {
+    return state.online;
+  });
+    
 
-  return auth ? <Outlet /> : <Navigate to="/login" />;
+  return online ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default ProtectedRoutes;

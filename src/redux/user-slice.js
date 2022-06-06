@@ -1,20 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { online: false };
+const initialState = { username: "", password: "", online: false };
 
 const userSlice = createSlice({
   name: "userSlice",
   initialState,
   reducers: {
     login(state, action) {
-      console.log(initialState, "login initialState");
-      state.online = true;
-      console.log(state.online, "login online state");
+      if (state.username.length > 0 && state.password.length > 0) {
+        console.log(state.username.length, "state.username.length");
+        state.online = true;
+      }
+      if (state.username.length < 0 || state.password.length < 0) {
+        console.log(state.username.length, "state.username.length not filled");
+      }
     },
     logout(state, action) {
-      console.log(initialState, "logout state");
       state.online = false;
-      console.log(state.online, "logout online state");
+    },
+    username(state, action) {
+      state.username = action.payload;
+      console.log(action.payload, "action.payload");
+      console.log(state, "username state");
+    },
+    password(state, action) {
+      state.password = action.payload;
+      console.log(action.payload, "action.payload");
+      console.log(state, "password state");
     },
   },
 });

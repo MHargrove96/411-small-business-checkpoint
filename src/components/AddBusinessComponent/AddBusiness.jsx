@@ -1,94 +1,93 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 
 import { Box, TextField, Button } from "@mui/material";
 import MapComponent from "../MapComponent/MapComponent";
 import { businessActions } from "../../redux/business-slice";
+import UserNameBar from '../UserNameBarComponent/UserNameBar'
+
+import classes from "./AddBusiness.module.css";
 
 function AddBusiness() {
-  const [businessName, setBusinessName] = useState("");
-  const [businessAddress, setBusinessAddress] = useState("");
-  const [businessHours, setBusinessHours] = useState("");
-  const [businessDescription, setBusinessDescription] = useState("");
-  const [newBusiness, setNewBusiness] = useState({});
+  // const [businessName, setBusinessName] = useState("");
+  // const [businessAddress, setBusinessAddress] = useState("");
+  // const [businessHours, setBusinessHours] = useState("");
+  // const [businessDescription, setBusinessDescription] = useState("");
+  const [newBusiness, setNewBusiness] = useState({
+    name: '',
+    address: '',
+    hours: '',
+    description: ''
+  });
 
-  function validateForm() {
-    return (
-      businessName.length > 0 &&
-      businessAddress.length > 0 &&
-      businessHours.length > 0
-    );
-  }
+  // function validateForm() {
+  //   return (
+  //     businessName.length > 0 &&
+  //     businessAddress.length > 0 &&
+  //     businessHours.length > 0
+  //   );
+  // }
   const handleName = (e) => {
-    setBusinessName(e.target.value);
-    setNewBusiness({ ...newBusiness, name: businessName });
+    setNewBusiness({ ...newBusiness, name: e.target.value });
   };
   const handleAddress = (e) => {
-    setBusinessAddress(e.target.value);
-    setNewBusiness({ ...newBusiness, address: businessAddress });
+    setNewBusiness({ ...newBusiness, address: e.target.value });
   };
   const handleHours = (e) => {
-    setBusinessHours(e.target.value);
-    setNewBusiness({ ...newBusiness, hours: businessHours });
+    setNewBusiness({ ...newBusiness, hours: e.target.value });
   };
   const handleDescription = (e) => {
-    setBusinessDescription(e.target.value);
-    setNewBusiness({ ...newBusiness, description: businessDescription });
+    setNewBusiness({ ...newBusiness, description: e.target.value });
   };
   const dispatch = useDispatch();
   const addBusiness = () => {
     dispatch(businessActions.addBusiness(newBusiness));
   };
 
-  // useEffect(() => {
-  //   console.log(newBusiness)
-  // },
-  // [newBusiness]);
-
   return (
     <main>
-      <Box>
-        <TextField
-          required
-          onChange={handleName}
-          value={businessName}
-          label="Name"
-          variant="standard"
-          fullWidth
-        ></TextField>
-        <TextField
-          required
-          onChange={handleAddress}
-          value={businessAddress}
-          label="Address"
-          variant="standard"
-          fullWidth
-        ></TextField>
-        <TextField
-          required
-          onChange={handleHours}
-          value={businessHours}
-          label="Hours (ex. 8AM-9PM)"
-          variant="standard"
-          fullWidth
-        ></TextField>
-        <TextField
-          required
-          onChange={handleDescription}
-          value={businessDescription}
-          label="Description"
-          variant="standard"
-          fullWidth
-        ></TextField>
-        <Button
-          variant="contained"
-          disabled={!validateForm()}
-          onClick={addBusiness}
-        >
-          SAVE
-        </Button>
-      </Box>
-      <MapComponent business={newBusiness} />
+    <UserNameBar></UserNameBar>
+      <section className={classes.main}>
+        <Box className={classes.textFeildBox}>
+          <TextField
+            required
+            onChange={handleName}
+            value={newBusiness.name}
+            label="Name"
+            variant="standard"
+          ></TextField>
+          <TextField
+            required
+            onChange={handleAddress}
+            value={newBusiness.address}
+            label="Address"
+            variant="standard"
+          ></TextField>
+          <TextField
+            required
+            onChange={handleHours}
+            value={newBusiness.hours}
+            label="Hours (ex. 8AM-9PM)"
+            variant="standard"
+          ></TextField>
+          <TextField
+            required
+            onChange={handleDescription}
+            value={newBusiness.description}
+            label="Description"
+            variant="standard"
+          ></TextField>
+          <Button
+            className={classes.submitBtn}
+            variant="contained"
+            // disabled={!validateForm()}
+            onClick={addBusiness}
+          >
+            SAVE
+          </Button>
+        </Box>
+        <MapComponent business={newBusiness} className={classes.mapComponent}/>
+      </section>
     </main>
   );
 }

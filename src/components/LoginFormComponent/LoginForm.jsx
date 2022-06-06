@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../../redux/user-slice";
 
-
 import { Box, TextField, Button } from "@mui/material";
 
 import classes from "./LoginForm.module.css";
@@ -12,7 +11,7 @@ export default function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   let navigate = useNavigate();
-  let dispatch =  useDispatch();
+  let dispatch = useDispatch();
 
   function validateForm() {
     return username.length > 0 && password.length > 0;
@@ -24,14 +23,19 @@ export default function LoginForm() {
     setPassword(e.target.value);
   };
   const { online } = useSelector((state) => {
-    return state
-  })
+    return state;
+  });
   const login = (e) => {
+    dispatch(userActions.username(username));
+    dispatch(userActions.password(password));
     dispatch(userActions.login());
-    localStorage.setItem('user', 'test')
-    navigate(-1)
-
+    localStorage.setItem("user", "test");
+    navigate(-1);
   };
+  // useEffect(() => {
+  //   console.log(username);
+  //   console.log(password);
+  // }, [username, password, online]);
 
   return (
     <Box
@@ -53,6 +57,7 @@ export default function LoginForm() {
       <TextField
         className={classes.passWordTf}
         required
+        type="password"
         onChange={handlePassword}
         value={password}
         label="Password"
